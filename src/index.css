@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html{
+  font-size: 62.5%;
+}
+body {
+  padding: 0;
+  margin: 0;
+  background-color: #1d1f26;
+  color: white;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
