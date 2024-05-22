@@ -3,14 +3,14 @@ import img from "../../assets/logo.svg";
 
 const TopBar = ({open}) => {
   return (
-    <header className="bg-[rgb(55,57,58)] text-white  shadow-md">
+    <header className="bg-[rgb(46,46,46)] text-white  shadow-md">
       <nav className="sm:h-[6.4rem] min-h-[4.8px] sm:px-10 flex items-center justify-between px-7">
         <img src={img} alt="logo" />
         <div className="flex items-center">
           <button onClick={open} className="bg-[rgb(190,164,255)] hover:bg-[rgb(176,146,254)] min-w-24 text-black font-bold text-xl py-[1rem] px-[1.6rem] font-sans">
             Create Borad
           </button>
-          <button className=" min-w-24 font-bold text-2xl py-[1rem] px-[1.6rem] font-sans flex items-center gap-2 ml-3 hover:bg-gra">
+          <button className=" min-w-24 font-bold text-2xl py-[1rem] px-[1.6rem] font-sans flex items-center gap-2 ml-3 hover:bg-gray-700">
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

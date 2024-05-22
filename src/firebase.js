@@ -21,6 +21,6 @@ export const fbFunctions = getFunctions(app);
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV === "development") {
   connectAuthEmulator(auth, "http://localhost:9099");
-  connectFirestoreEmulator(db, "localhost", 8082);
+  connectFirestoreEmulator(db, "localhost", 8080);
   connectFunctionsEmulator(fbFunctions, "localhost", 5002);
 }

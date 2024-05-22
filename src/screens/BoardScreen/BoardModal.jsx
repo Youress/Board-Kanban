@@ -7,15 +7,38 @@ import {
   TransitionChild,
 } from "@headlessui/react";
 import { useState } from "react";
+import useApp from "../../Hooks/useApp";
 
 export default function BoardModal({close, isopen }) {
-  const [selectedColor, setSelectedColor] = useState(null);
+  const {createBoard} = useApp()
+  const [color, setSelectedColor] = useState(null);
+  const [name, setName] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  const colors = ["red", "yellow", "green", "purple", "blue", "gray"];
+  const colors = [
+    "F49D6E",
+    "E85A4F",
+    "FFD166",
+    "8ABEB7",
+    "247BA0",
+    "D3D3D3",
+  ];
 
   const handleColorClick = (color) => {
     setSelectedColor(color);
   };
+  const handleCraete = async () => {
+    try {
+      setLoading(true)
+     await createBoard({name ,color})
+     console.log({name ,color} , 'vs' , name ,color)
+     close()
+    } catch (error) {
+      setLoading(false)
+      console.log(error)
+    }
+
+  }
   return (
     <>
       <Transition appear show={isopen}>
@@ -53,6 +76,7 @@ export default function BoardModal({close, isopen }) {
                           name="boradname"
                           type="text"
                           placeholder="Board Name"
+                          onChange={(e)=>setName(e.target.value)}
                           required
                           className="block w-full border-[1px] outline-none py-[16px] px-[14px] bg-transparent  border-white focus:border-purple-600 "
                         />
@@ -61,21 +85,21 @@ export default function BoardModal({close, isopen }) {
                     <div className="flex items-center gap-10">
                       <p className="font-bold text-2xl">Color:</p>
                       <div className="flex gap-4">
-                        {colors.map((color) => (
+                        {colors.map((colors) => (
                           <span
-                            key={color}
-                            onClick={() => handleColorClick(color)}
-                            className={`inline-block h-12 w-12 rounded-full cursor-pointer bg-${color}-500 ${
-                              selectedColor === color
-                                ? `outline outline-2 outline-${color}-500  border-2 border-black`
+                            key={colors}
+                            onClick={() => handleColorClick(colors)}
+                            className={`inline-block h-12 w-12 rounded-full cursor-pointer ${
+                              color === colors
+                                ? `outline outline-2 border-2 border-black`
                                 : "border-none"
-                            }`}
+                            }`}style={{ backgroundColor: `#${colors}`,outlineColor :`#${colors}` }}
                           ></span>
                         ))}
                       </div>
                     </div>
                     <div className="mt-6">
-                      <button className="w-full bg-[rgb(190,164,255)] px-9 py-4 text-2xl font-bold text-black hover:bg-[rgb(176,146,254)]">
+                      <button onClick={handleCraete} disabled={loading} className="w-full bg-[rgb(190,164,255)] px-9 py-4 text-2xl font-bold text-black hover:bg-[rgb(176,146,254)]">
                         Create
                       </button>
                     </div>
