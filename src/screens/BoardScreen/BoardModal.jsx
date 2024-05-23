@@ -31,7 +31,7 @@ export default function BoardModal({close, isopen }) {
     try {
       setLoading(true)
      await createBoard({name ,color})
-     console.log({name ,color} , 'vs' , name ,color)
+     setLoading(false)
      close()
     } catch (error) {
       setLoading(false)
