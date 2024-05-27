@@ -1,5 +1,7 @@
 import React from "react";
 import img from "../../assets/logo.svg";
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const TopBar = ({open}) => {
   return (
@@ -10,7 +12,7 @@ const TopBar = ({open}) => {
           <button onClick={open} className="bg-[rgb(190,164,255)] hover:bg-[rgb(176,146,254)] min-w-24 text-black font-bold text-xl py-[1rem] px-[1.6rem] font-sans">
             Create Borad
           </button>
-          <button className=" min-w-24 font-bold text-2xl py-[1rem] px-[1.6rem] font-sans flex items-center gap-2 ml-3 hover:bg-gray-700">
+          <button onClick={()=> signOut(auth)} className=" min-w-24 font-bold text-2xl py-[1rem] px-[1.6rem] font-sans flex items-center gap-2 ml-3 hover:bg-gray-700">
             <span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"

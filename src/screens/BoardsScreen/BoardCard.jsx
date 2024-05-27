@@ -16,7 +16,7 @@ const BoardCard = ({ boards }) => {
                 style={{ borderColor: borderColor}}              >
                 <div className="flex items-center justify-between">
                   <div className="w-1/2">
-                    <h6 className="font-bold text-3xl overflow-hidden  text-ellipsis whitespace-nowrap ">
+                    <h6 style={{ color: borderColor}} className="font-bold text-3xl overflow-hidden  text-ellipsis whitespace-nowrap uppercase ">
                       {board.name}
                     </h6>
                   </div>
@@ -37,7 +37,7 @@ const BoardCard = ({ boards }) => {
                     </svg>
                   </button>
                 </div>
-                <span>Created at:{board.createdAt}</span>
+                <span>Created at: {board.createdAt}</span>
               </div>
             </div>
           );

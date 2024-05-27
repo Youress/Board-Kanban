@@ -3,6 +3,8 @@ import {
   addDoc,
   serverTimestamp,
   getDocs,
+  query,
+  orderBy
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { getAuth } from "firebase/auth";
@@ -14,7 +16,7 @@ const useApp = () => {
   const {
     currentUser: { uid },
   } = getAuth();
-  const boardColRef = collection(db, `user/${uid}/boards`);
+  const boardColRef = collection(db, `users/${uid}/boards`);
   const createBoard = async ({ name, color }) => {
     try {
       await addDoc(boardColRef, {
@@ -30,7 +32,8 @@ const useApp = () => {
   };
   const fetchBoard = async (setLoading) => {
     try {
-      const querySnapshot = await getDocs(boardColRef);
+      const q = query(boardColRef, orderBy('createdAt',"desc"))
+      const querySnapshot = await getDocs(q);
       const boards = querySnapshot.docs.map((doc) => ({
         ...doc.data(),
         id: doc.id,

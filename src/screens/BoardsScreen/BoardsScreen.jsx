@@ -7,7 +7,7 @@ import AppLoader from "../../components/layout/AppLoader";
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const BoardScreen = () => {
+const BoardsScreen = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
   const { fetchBoard } = useApp();
@@ -29,12 +29,12 @@ const BoardScreen = () => {
   if (loading) return <AppLoader />;
   return (
     <>
-      <TopBar open={openModal} close={closeModal} isopen={isOpen} />
-      <BoardModal open={openModal} close={closeModal} isopen={isOpen} />
+      <TopBar open={openModal} />
+      <BoardModal close={closeModal} isopen={isOpen} />
       {/* <NoBorad/> */}
       <BoardCard boards={boards} />
     </>
   );
 };
 
-export default BoardScreen;
+export default BoardsScreen;
