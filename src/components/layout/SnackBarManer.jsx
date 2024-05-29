@@ -11,7 +11,7 @@ const SnackBarManer = () => {
         dispatch(setToaster(""))
     },3000)
   return (
-    <Dialog className="fixed top-12 right-auto left-1/2 -translate-x-1/2 -translate-y-1/2" open={!!toastrMsg} onClose={() => dispatch(setToaster(""))}>
+    <Dialog className="fixed top-12 right-auto left-1/2 -translate-x-1/2 -translate-y-1/2 z-50" open={!!toastrMsg} onClose={() => dispatch(setToaster(""))}>
       <DialogPanel className="min-w-[28rem] bg-white px-7 py-3 ">
         <DialogTitle className="text-black font-bold font-sans capitalize ">{toastrMsg}</DialogTitle>
       </DialogPanel>

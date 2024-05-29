@@ -10,7 +10,7 @@ import { useSelector } from "react-redux";
 const BoardsScreen = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const { fetchBoard } = useApp();
+  const { fetchBoards } = useApp();
   const {areBoardsFetched, boards} = useSelector(
     (state) => state.userData
   );
@@ -22,7 +22,7 @@ const BoardsScreen = () => {
   };
 
   useEffect(() => {
-    if (!areBoardsFetched) fetchBoard(setLoading);
+    if (!areBoardsFetched) fetchBoards(setLoading);
     else setLoading(false);
   }, []);
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
     Dialog,
     DialogPanel,
@@ -6,14 +6,15 @@ import {
     TransitionChild,
   } from "@headlessui/react";
 
-const AddTaskModal = ({isopen ,close}) => {
+const AddTaskModal = ({onClose,tabName, addTask, loading}) => {
+  const [text, setText] = useState('')
   return (
     <>
-    <Transition appear show={isopen}>
+    <Transition appear show={true}>
         <Dialog
           as="div"
           className="relative z-10 focus:outline-none"
-          onClose={()=>close()}
+          onClose={onClose}
           
         >        <div className="fixed inset-0 bg-black/70" aria-hidden="true" />
 
@@ -32,17 +33,18 @@ const AddTaskModal = ({isopen ,close}) => {
                     <h6 className="font-bold font-sans text-4xl">
                       Add Task
                     </h6>
-                    <button onClick={close} className="text-4xl hover:bg-gray-600 h-16 w-16 flex items-center justify-center rounded-full">
+                    <button onClick={onClose} className="text-4xl hover:bg-gray-600 h-16 w-16 flex items-center justify-center rounded-full">
                       x
                     </button>
                   </div>
                   <div className='flex items-center gap-4'>
-                    <p className='font-bold'>Status:</p> <span className='bg-[rgb(119,121,128)] rounded-3xl px-3 text-xl'>Todos</span>
+                    <p className='font-bold'>Status:</p> <span className='bg-[rgb(119,121,128)] rounded-3xl px-3 text-xl'>{tabName}</span>
                   </div>
                   <div>
                     <div className="my-6">
                       <div className="mt-2">
                         <input
+                        onChange={(e)=>setText(e.target.value)}
                           id="task"
                           name="task"
                           type="text"
@@ -54,7 +56,7 @@ const AddTaskModal = ({isopen ,close}) => {
                     </div>
                     
                     <div className="mt-6">
-                      <button className="w-full bg-[rgb(190,164,255)] px-9 py-4 text-2xl font-bold text-black hover:bg-[rgb(176,146,254)]">
+                      <button disabled={loading} onClick={()=>addTask(text)} className="w-full bg-[rgb(190,164,255)] px-9 py-4 text-2xl font-bold text-black hover:bg-[rgb(176,146,254)]">
                         Add Task
                       </button>
                     </div>

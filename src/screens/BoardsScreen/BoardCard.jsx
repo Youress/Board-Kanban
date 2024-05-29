@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const BoardCard = ({ boards }) => {
+  const navigate = useNavigate()
   return (
     <div className="mt-16 px-7">
       <div className="flex flex-wrap sm:-ml-12 -ml-6">
@@ -20,7 +22,7 @@ const BoardCard = ({ boards }) => {
                       {board.name}
                     </h6>
                   </div>
-                  <button>
+                  <button onClick={()=>navigate(`/boards/${board.id}`)}>
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"

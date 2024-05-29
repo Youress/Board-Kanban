@@ -1,9 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const BoardTopBar = () => {
+const BoardTopBar = ({name,color,lastupdated}) => {
   return (
-    <header className="bg-[rgb(46,46,46)] text-white  shadow-md border-b-4 border-orange-500">
+    <header className="bg-[rgb(46,46,46)] text-white  shadow-md border-b-4" style={{borderColor:`#${color}`}}>
       <nav className="sm:h-[6.4rem] min-h-[4.8px] sm:px-10 flex items-center justify-between px-7">
         <div className="flex items-center ">
           <NavLink
@@ -25,10 +25,10 @@ const BoardTopBar = () => {
               />
             </svg>
           </NavLink>
-          <h6 className="font-bold text-4xl">Salam</h6>
+          <h6 className="font-bold text-4xl">{name}</h6>
         </div>
         <div className="flex items-center">
-          <span>Last updated: 5/22/2024, 2:06:54 PM</span>
+          <span>Last updated: {lastupdated}</span>
           <span className="ml-8 cursor-pointer">
             <svg
               xmlns="http://www.w3.org/2000/svg"
