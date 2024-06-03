@@ -11,7 +11,7 @@ const BoardTap = ({ name, openTask, tasks, status, removeTask }) => {
         <div
           {...provided.droppableProps}
           ref={provided.innerRef}
-          className="pl-6 pt-6"
+          className="sm:pl-6 pt-6"
         >
           <div className="flex flex-col p-9 bg-black">
             <div className="flex items-center justify-between mb-4">

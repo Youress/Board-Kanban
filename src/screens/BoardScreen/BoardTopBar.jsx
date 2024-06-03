@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const BoardTopBar = ({name,color,lastupdated}) => {
+const BoardTopBar = ({name,color,lastupdated, deleteBoard}) => {
   return (
     <header className="bg-[rgb(46,46,46)] text-white  shadow-md border-b-4" style={{borderColor:`#${color}`}}>
-      <nav className="sm:h-[6.4rem] min-h-[4.8px] sm:px-10 flex items-center justify-between px-7">
+      <nav className="sm:h-[6.4rem] min-h-[48px] sm:px-10 flex items-center justify-between px-7 ">
         <div className="flex items-center ">
           <NavLink
             to="/boards"
@@ -27,9 +27,9 @@ const BoardTopBar = ({name,color,lastupdated}) => {
           </NavLink>
           <h6 className="font-bold text-4xl">{name}</h6>
         </div>
-        <div className="flex items-center">
-          <span>Last updated: {lastupdated}</span>
-          <span className="ml-8 cursor-pointer">
+        <div className="flex items-center ">
+          <span className="hidden sm:block">Last updated: {lastupdated}</span>
+          <span className="ml-8 cursor-pointer" onClick={deleteBoard}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"

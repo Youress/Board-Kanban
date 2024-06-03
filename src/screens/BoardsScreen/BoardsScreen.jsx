@@ -32,7 +32,7 @@ const BoardsScreen = () => {
       <TopBar open={openModal} />
       <BoardModal close={closeModal} isopen={isOpen} />
       {/* <NoBorad/> */}
-      <BoardCard boards={boards} />
+      {!boards.length ? <NoBorad/>:<BoardCard boards={boards} />}
     </>
   );
 };

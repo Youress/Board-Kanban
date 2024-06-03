@@ -11,7 +11,7 @@ const BoardCard = ({ boards }) => {
           return (
             <div
               key={i}
-              className=" max-w-[25%] basis-1/4 grow-0 sm:pl-12 pl-6 pt-6 sm-pt-12"
+              className=" sm:max-w-[25%] sm:basis-1/4 sm:grow-0 sm:pl-12 pl-6 pt-6 sm-pt-12 w-full"
             >
               <div
                 className={`flex flex-col p-6 bg-[rgba(18,18,18)] border-l-4   gap-3`}

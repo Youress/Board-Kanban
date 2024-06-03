@@ -8,14 +8,18 @@ import {
   doc,
   getDoc,
   updateDoc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "../firebase";
 import { getAuth } from "firebase/auth";
-import { setBoard, addBoard } from "../features/redux/UserSlice";
-import { useDispatch } from "react-redux";
+import { setBoard, addBoard, setToaster } from "../features/redux/UserSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const useApp = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const { boards } = useSelector((state) => state.userData);
   const {
     currentUser: { uid },
   } = getAuth();
@@ -36,7 +40,7 @@ const useApp = () => {
         })
       );
     } catch (error) {
-      console.log(error);
+      dispatch(setToaster("Error Creating Board"));
       throw error;
     }
   };
@@ -51,7 +55,7 @@ const useApp = () => {
       }));
       dispatch(setBoard(boards));
     } catch (error) {
-      throw error;
+      dispatch(setToaster("Error updating Boards"));
     } finally {
       if (setLoading) setLoading(false);
     }
@@ -67,6 +71,7 @@ const useApp = () => {
         return null;
       }
     } catch (error) {
+      dispatch(setToaster("Error fetching Board"));
       throw error;
     }
   };
@@ -76,11 +81,28 @@ const useApp = () => {
     try {
       await updateDoc(docRef, { tabs, lastUpdated: serverTimestamp() });
     } catch (error) {
-      console.log(error);
+      dispatch(setToaster("Error updating Board"));
+      throw error;
     }
   };
 
-  return { createBoard, fetchBoards, fetchBoard, updateBoardData };
+  const deleteBoard = async (boardId) => {
+    const docRef = doc(db, `users/${uid}/boards/${boardId}`);
+
+    try {
+      //delete the doc from DB;
+      await deleteDoc(docRef);
+      // update the boards store;
+      const tBoards = boards.filter((board) => board.id !== boardId);
+      dispatch(setBoard(tBoards));
+      navigate("/boards");
+    } catch (error) {
+      dispatch(setToaster("Error deleting the board"));
+      throw error;
+    }
+  };
+
+  return { createBoard, fetchBoards, fetchBoard, updateBoardData, deleteBoard };
 };
 
 export default useApp;
